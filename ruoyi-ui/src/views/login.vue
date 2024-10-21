@@ -56,7 +56,7 @@
     </el-form>
     <!--  底部  -->
     <div class="el-login-footer">
-      <span>Copyright © 2018-2024 ruoyi.vip All Rights Reserved.</span>
+      <span>智能学习计划平台-登录</span>
     </div>
   </div>
 </template>
@@ -172,7 +172,8 @@ export default {
 
 .login-form {
   border-radius: 6px;
-  background: #ffffff;
+  //background: #ffffff;
+  background: rgba(255, 255, 255, 0.6); /* 设置了 60%不透明度的白色背景 */
   width: 400px;
   padding: 25px 25px 5px 25px;
   .el-input {
