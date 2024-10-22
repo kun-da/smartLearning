@@ -1,19 +1,26 @@
 package com.ruoyi.smartLearning.mapper;
 
+import java.util.Date;
 import java.util.List;
 import com.ruoyi.smartLearning.domain.LearningPlans;
 
 /**
  * 学习计划Mapper接口
- * 
+ *
  * @author ruoyi
  * @date 2024-10-21
  */
-public interface LearningPlansMapper 
+public interface LearningPlansMapper
 {
     /**
+     * 查询当前日期的学习计划
+     */
+    List<LearningPlans> selectLearningPlansByDate(Date currentDate);
+
+
+    /**
      * 查询学习计划
-     * 
+     *
      * @param id 学习计划主键
      * @return 学习计划
      */
@@ -21,7 +28,7 @@ public interface LearningPlansMapper
 
     /**
      * 查询学习计划列表
-     * 
+     *
      * @param learningPlans 学习计划
      * @return 学习计划集合
      */
@@ -29,7 +36,7 @@ public interface LearningPlansMapper
 
     /**
      * 新增学习计划
-     * 
+     *
      * @param learningPlans 学习计划
      * @return 结果
      */
@@ -37,7 +44,7 @@ public interface LearningPlansMapper
 
     /**
      * 修改学习计划
-     * 
+     *
      * @param learningPlans 学习计划
      * @return 结果
      */
@@ -45,7 +52,7 @@ public interface LearningPlansMapper
 
     /**
      * 删除学习计划
-     * 
+     *
      * @param id 学习计划主键
      * @return 结果
      */
@@ -53,7 +60,7 @@ public interface LearningPlansMapper
 
     /**
      * 批量删除学习计划
-     * 
+     *
      * @param ids 需要删除的数据主键集合
      * @return 结果
      */
