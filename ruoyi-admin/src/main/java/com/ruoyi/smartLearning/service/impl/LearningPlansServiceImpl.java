@@ -1,7 +1,9 @@
 package com.ruoyi.smartLearning.service.impl;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,25 +23,18 @@ public class LearningPlansServiceImpl implements ILearningPlansService {
     @Autowired
     private LearningPlansMapper learningPlansMapper;
 
-    //测试
-    @Test
-    public void test() {
-        System.out.println("学习计划模块-测试");
-        //获取当前日期
-        Date currentDate = new Date();
-        System.out.println("currentDate = " + currentDate);
-    }
-
-
     /**
      * 获取（查询）当前时间段的计划
      */
     @Override
-    public List<LearningPlans> selectLearningPlansByDate() {
+    public List<LearningPlans> selectLearningPlansByDate(Long userId) {
         //获取当前日期
         Date currentDate = new Date();
         //查询当前时间段的计划
-        List<LearningPlans> learningPlans = learningPlansMapper.selectLearningPlansByDate(currentDate);
+        Map<String, Object> params = new HashMap<>();
+        params.put("userId", userId);
+        params.put("currentDate", currentDate);
+        List<LearningPlans> learningPlans = learningPlansMapper.selectLearningPlansByDate(params);
         // 判断非空，如果为空则抛出异常
         if (learningPlans == null || learningPlans.isEmpty()) {
             throw new RuntimeException("当前没有处于当前时间段的计划。");

@@ -2,6 +2,8 @@ package com.ruoyi.smartLearning.mapper;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+
 import com.ruoyi.smartLearning.domain.LearningPlans;
 
 /**
@@ -15,7 +17,7 @@ public interface LearningPlansMapper
     /**
      * 查询当前日期的学习计划
      */
-    List<LearningPlans> selectLearningPlansByDate(Date currentDate);
+    List<LearningPlans> selectLearningPlansByDate(Map<String, Object> map);
 
 
     /**

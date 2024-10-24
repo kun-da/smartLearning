@@ -37,9 +37,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id = #{id}
     </select>
 
-    <select id="selectLearningPlansByDate" parameterType="Date" resultMap="LearningPlansResult">
+    <select id="selectLearningPlansByDate" parameterType="map" resultMap="LearningPlansResult">
         <include refid="selectLearningPlansVo"/>
-        WHERE #{currentDate} BETWEEN start_date AND end_date
+        WHERE user_id=#{userId} AND #{currentDate} BETWEEN start_date AND end_date
     </select>
 
     <insert id="insertLearningPlans" parameterType="LearningPlans" useGeneratedKeys="true" keyProperty="id">
