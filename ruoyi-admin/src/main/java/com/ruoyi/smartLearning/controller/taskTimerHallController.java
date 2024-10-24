@@ -3,6 +3,7 @@ package com.ruoyi.smartLearning.controller;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.smartLearning.domain.LearningPlans;
+import com.ruoyi.smartLearning.domain.LearningProgress;
 import com.ruoyi.smartLearning.domain.Tasks;
 import com.ruoyi.smartLearning.service.ILearningPlansService;
 import com.ruoyi.smartLearning.service.ILearningProgressService;
@@ -59,14 +60,14 @@ public class taskTimerHallController extends BaseController {
     public AjaxResult getTaskTimerProgress(Tasks tasks){
         //获取用户id
         Long userId = getUserId();
-        //创建map并存入数据
-        HashMap<String, Object> objectHashMap = new HashMap<>();
-        objectHashMap.put("userId",userId);
-        objectHashMap.put("planId",tasks.getPlanId());
-        objectHashMap.put("taskId",tasks.getId());
+        //将用户id等数据封装到LearningProgress实体类中
+        LearningProgress learningProgress = new LearningProgress();
+        learningProgress.setUserId(userId);
+        learningProgress.setPlanId(tasks.getPlanId());
+        learningProgress.setTaskId(tasks.getId());
         //根据用户id，计划id，任务id查询学习进度
-
-        return null;
+        List<LearningProgress> learningProgresses = learningProgressService.selectLearningProgressListHall(learningProgress);
+        return AjaxResult.success(learningProgresses);
     }
 
 
