@@ -23,7 +23,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * 学习进度Controller
- * 
+ *
  * @author 虞嘉欣
  * @date 2024-10-21
  */
@@ -88,6 +88,7 @@ public class LearningProgressController extends BaseController
     @PutMapping
     public AjaxResult edit(@RequestBody LearningProgress learningProgress)
     {
+//        System.out.println("learningProgress = " + learningProgress);
         return toAjax(learningProgressService.updateLearningProgress(learningProgress));
     }
 

@@ -14,7 +14,7 @@ public interface ILearningPlansService
     /**
      * 查询学习计划,根据当前日期
      */
-    List<LearningPlans> selectLearningPlansByDate(Long userId);
+    List<LearningPlans> selectLearningPlansByDate(Long userId, String date);
     /**
      * 查询学习计划
      *

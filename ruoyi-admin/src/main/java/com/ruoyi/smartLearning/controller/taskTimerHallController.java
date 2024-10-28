@@ -9,11 +9,9 @@ import com.ruoyi.smartLearning.service.ILearningPlansService;
 import com.ruoyi.smartLearning.service.ILearningProgressService;
 import com.ruoyi.smartLearning.service.ITasksService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.xml.crypto.Data;
 import java.util.HashMap;
 import java.util.List;
 
@@ -31,15 +29,30 @@ public class taskTimerHallController extends BaseController {
     @Autowired
     private ILearningProgressService learningProgressService;
 
+
+
+
     /**
-     * 获取（查询）当前时间段的计划
+     * 获取（查询）计划，根据用户id查询
      */
     @GetMapping("/getTaskTimerHall")
     public AjaxResult getTaskTimerHall() {
         Long userId = getUserId();
-        List<LearningPlans> learningPlans = learningPlansService.selectLearningPlansByDate(userId);
+        List<LearningPlans> learningPlans = learningPlansService.selectLearningPlansByDate(userId, null);
         return AjaxResult.success(learningPlans);
     }
+
+    /**
+     * 查询学习计划，传入日期参数，get
+     */
+    @GetMapping("/getTaskTimerHallByDate/{date}")
+    public AjaxResult getTaskTimerHallByDate(@PathVariable("date") String date) {
+        System.out.println("date = " + date);
+        Long userId = getUserId();
+        List<LearningPlans> learningPlans = learningPlansService.selectLearningPlansByDate(userId,date);
+        return AjaxResult.success(learningPlans);
+    }
+
 
     /**
      * 根据计划id查询学习任务
@@ -57,7 +70,7 @@ public class taskTimerHallController extends BaseController {
      * 查询学习进度，若不存在则创建，传入（参数计划id，任务id，用户id）tasks实体类
      */
     @PostMapping("/getTaskTimerProgress")
-    public AjaxResult getTaskTimerProgress(Tasks tasks){
+    public AjaxResult getTaskTimerProgress(@RequestBody Tasks tasks){
         //获取用户id
         Long userId = getUserId();
         //将用户id等数据封装到LearningProgress实体类中
@@ -70,5 +83,14 @@ public class taskTimerHallController extends BaseController {
         return AjaxResult.success(learningProgresses);
     }
 
+    /**
+     * 修改学习进度
+     */
+    @PutMapping
+    public AjaxResult edit(@RequestBody LearningProgress learningProgress)
+    {
+//        System.out.println("learningProgress = " + learningProgress);
+        return toAjax(learningProgressService.updateLearningProgress(learningProgress));
+    }
 
 }

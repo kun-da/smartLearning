@@ -33,13 +33,12 @@ public class LearningProgressServiceImpl implements ILearningProgressService
         List<LearningProgress> learningProgresses = learningProgressMapper.selectLearningProgressList(learningProgress);
         //如果查询不到则新增
         if(learningProgresses.isEmpty()){
-            System.out.println("查询不到学习进度，将新增===============");
-            //设置学习进度为0
-            learningProgress.setHoursSpent(BigDecimal.valueOf(0));
-            System.out.println("learningProgresses = " + learningProgresses);
+//            System.out.println("查询不到学习进度，将新增===============");
+            //设置学习进度为0秒
+            learningProgress.setHoursSpent(0L);
+//            System.out.println("新增数据：" + learningProgress);
             learningProgressMapper.insertLearningProgress(learningProgress);
-            List<LearningProgress> learningProgresses2 = learningProgressMapper.selectLearningProgressList(learningProgress);
-            return learningProgresses2;
+            return learningProgressMapper.selectLearningProgressList(learningProgress);
         }
         return learningProgresses;
     }

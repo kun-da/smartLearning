@@ -10,7 +10,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
  * 学习进度对象 learning_progress
- * 
+ *
  * @author 虞嘉欣
  * @date 2024-10-21
  */
@@ -35,64 +35,64 @@ public class LearningProgress extends BaseEntity
 
     /** 用户在任务上花费的学习时间（小时） */
     @Excel(name = "用户在任务上花费的学习时间", readConverterExp = "小=时")
-    private BigDecimal hoursSpent;
+    private Long hoursSpent;
 
     /** 学习进度的最后更新时间，更新时自动修改 */
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Excel(name = "学习进度的最后更新时间，更新时自动修改", width = 30, dateFormat = "yyyy-MM-dd")
     private Date updatedAt;
 
-    public void setId(Long id) 
+    public void setId(Long id)
     {
         this.id = id;
     }
 
-    public Long getId() 
+    public Long getId()
     {
         return id;
     }
-    public void setUserId(Long userId) 
+    public void setUserId(Long userId)
     {
         this.userId = userId;
     }
 
-    public Long getUserId() 
+    public Long getUserId()
     {
         return userId;
     }
-    public void setPlanId(Long planId) 
+    public void setPlanId(Long planId)
     {
         this.planId = planId;
     }
 
-    public Long getPlanId() 
+    public Long getPlanId()
     {
         return planId;
     }
-    public void setTaskId(Long taskId) 
+    public void setTaskId(Long taskId)
     {
         this.taskId = taskId;
     }
 
-    public Long getTaskId() 
+    public Long getTaskId()
     {
         return taskId;
     }
-    public void setHoursSpent(BigDecimal hoursSpent) 
+    public void setHoursSpent(Long hoursSpent)
     {
         this.hoursSpent = hoursSpent;
     }
 
-    public BigDecimal getHoursSpent() 
+    public Long getHoursSpent()
     {
         return hoursSpent;
     }
-    public void setUpdatedAt(Date updatedAt) 
+    public void setUpdatedAt(Date updatedAt)
     {
         this.updatedAt = updatedAt;
     }
 
-    public Date getUpdatedAt() 
+    public Date getUpdatedAt()
     {
         return updatedAt;
     }
