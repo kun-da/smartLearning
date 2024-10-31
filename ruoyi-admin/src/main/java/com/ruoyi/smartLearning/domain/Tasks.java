@@ -10,7 +10,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
  * 学习任务对象 tasks
- * 
+ *
  * @author 虞嘉欣
  * @date 2024-10-21
  */
@@ -34,8 +34,8 @@ public class Tasks extends BaseEntity
     private String description;
 
     /** 任务状态（未开始、进行中、已完成） */
-    @Excel(name = "任务状态", readConverterExp = "未=开始、进行中、已完成")
-    private String status;
+    @Excel(name = "任务状态", readConverterExp = "未开始、进行中、已完成")
+    private Long status;
 
     /** 任务的截止日期 */
     @JsonFormat(pattern = "yyyy-MM-dd")
@@ -56,84 +56,84 @@ public class Tasks extends BaseEntity
     @Excel(name = "任务的最后更新时间，更新时自动修改", width = 30, dateFormat = "yyyy-MM-dd")
     private Date updatedAt;
 
-    public void setId(Long id) 
+    public void setId(Long id)
     {
         this.id = id;
     }
 
-    public Long getId() 
+    public Long getId()
     {
         return id;
     }
-    public void setPlanId(Long planId) 
+    public void setPlanId(Long planId)
     {
         this.planId = planId;
     }
 
-    public Long getPlanId() 
+    public Long getPlanId()
     {
         return planId;
     }
-    public void setTaskName(String taskName) 
+    public void setTaskName(String taskName)
     {
         this.taskName = taskName;
     }
 
-    public String getTaskName() 
+    public String getTaskName()
     {
         return taskName;
     }
-    public void setDescription(String description) 
+    public void setDescription(String description)
     {
         this.description = description;
     }
 
-    public String getDescription() 
+    public String getDescription()
     {
         return description;
     }
-    public void setStatus(String status) 
+    public void setStatus(Long status)
     {
         this.status = status;
     }
 
-    public String getStatus() 
+    public Long getStatus()
     {
         return status;
     }
-    public void setDueDate(Date dueDate) 
+    public void setDueDate(Date dueDate)
     {
         this.dueDate = dueDate;
     }
 
-    public Date getDueDate() 
+    public Date getDueDate()
     {
         return dueDate;
     }
-    public void setTotalTime(BigDecimal totalTime) 
+    public void setTotalTime(BigDecimal totalTime)
     {
         this.totalTime = totalTime;
     }
 
-    public BigDecimal getTotalTime() 
+    public BigDecimal getTotalTime()
     {
         return totalTime;
     }
-    public void setCreatedAt(Date createdAt) 
+    public void setCreatedAt(Date createdAt)
     {
         this.createdAt = createdAt;
     }
 
-    public Date getCreatedAt() 
+    public Date getCreatedAt()
     {
         return createdAt;
     }
-    public void setUpdatedAt(Date updatedAt) 
+    public void setUpdatedAt(Date updatedAt)
     {
         this.updatedAt = updatedAt;
     }
 
-    public Date getUpdatedAt() 
+    public Date getUpdatedAt()
     {
         return updatedAt;
     }

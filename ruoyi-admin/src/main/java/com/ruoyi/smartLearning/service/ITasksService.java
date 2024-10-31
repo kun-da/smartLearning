@@ -5,15 +5,15 @@ import com.ruoyi.smartLearning.domain.Tasks;
 
 /**
  * 学习任务Service接口
- * 
+ *
  * @author 虞嘉欣
  * @date 2024-10-21
  */
-public interface ITasksService 
+public interface ITasksService
 {
     /**
      * 查询学习任务
-     * 
+     *
      * @param id 学习任务主键
      * @return 学习任务
      */
@@ -21,7 +21,7 @@ public interface ITasksService
 
     /**
      * 查询学习任务列表
-     * 
+     *
      * @param tasks 学习任务
      * @return 学习任务集合
      */
@@ -29,7 +29,7 @@ public interface ITasksService
 
     /**
      * 新增学习任务
-     * 
+     *
      * @param tasks 学习任务
      * @return 结果
      */
@@ -37,7 +37,7 @@ public interface ITasksService
 
     /**
      * 修改学习任务
-     * 
+     *
      * @param tasks 学习任务
      * @return 结果
      */
@@ -45,7 +45,7 @@ public interface ITasksService
 
     /**
      * 批量删除学习任务
-     * 
+     *
      * @param ids 需要删除的学习任务主键集合
      * @return 结果
      */
@@ -53,9 +53,13 @@ public interface ITasksService
 
     /**
      * 删除学习任务信息
-     * 
+     *
      * @param id 学习任务主键
      * @return 结果
      */
     public int deleteTasksById(Long id);
+
+    int updateTaskStatus(Tasks tasks);
+
+    int updateTaskStatusToComplete(Tasks tasks);
 }

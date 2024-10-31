@@ -30,6 +30,26 @@ public class taskTimerHallController extends BaseController {
     private ILearningProgressService learningProgressService;
 
 
+    /**
+     * 判断任务是否过期，如果过期，则修改状态为过期
+     */
+    @PutMapping("/updateTaskStatus")
+    public AjaxResult updateTaskStatus(@RequestBody Tasks tasks) {
+        int i = tasksService.updateTaskStatus(tasks);
+        return AjaxResult.success(i);
+    }
+
+    /**
+     * 修改任务状态为已完成
+     */
+    @PutMapping("/updateTaskStatusToComplete")
+    public AjaxResult updateTaskStatusToComplete(@RequestBody Tasks tasks) {
+        int i = tasksService.updateTaskStatusToComplete(tasks);
+        return AjaxResult.success(i);
+    }
+
+
+
 
 
     /**
