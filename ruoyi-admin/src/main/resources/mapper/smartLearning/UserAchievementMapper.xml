@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.smartLearning.mapper.UserAchievementMapper">
+    
+    <resultMap type="UserAchievement" id="UserAchievementResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="achievementId"    column="achievement_id"    />
+        <result property="achievementTime"    column="achievement_time"    />
+    </resultMap>
+
+    <sql id="selectUserAchievementVo">
+        select id, user_id, achievement_id, achievement_time from user_achievement
+    </sql>
+
+    <select id="selectUserAchievementList" parameterType="UserAchievement" resultMap="UserAchievementResult">
+        <include refid="selectUserAchievementVo"/>
+        <where>  
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="achievementId != null "> and achievement_id = #{achievementId}</if>
+            <if test="achievementTime != null "> and achievement_time = #{achievementTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectUserAchievementById" parameterType="Long" resultMap="UserAchievementResult">
+        <include refid="selectUserAchievementVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertUserAchievement" parameterType="UserAchievement" useGeneratedKeys="true" keyProperty="id">
+        insert into user_achievement
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="achievementId != null">achievement_id,</if>
+            <if test="achievementTime != null">achievement_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="achievementId != null">#{achievementId},</if>
+            <if test="achievementTime != null">#{achievementTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateUserAchievement" parameterType="UserAchievement">
+        update user_achievement
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="achievementId != null">achievement_id = #{achievementId},</if>
+            <if test="achievementTime != null">achievement_time = #{achievementTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteUserAchievementById" parameterType="Long">
+        delete from user_achievement where id = #{id}
+    </delete>
+
+    <delete id="deleteUserAchievementByIds" parameterType="String">
+        delete from user_achievement where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
