@@ -5,15 +5,15 @@ import com.ruoyi.smartLearning.domain.UserAchievement;
 
 /**
  * 用户成就Service接口
- * 
+ *
  * @author 虞
  * @date 2024-11-05
  */
-public interface IUserAchievementService 
+public interface IUserAchievementService
 {
     /**
      * 查询用户成就
-     * 
+     *
      * @param id 用户成就主键
      * @return 用户成就
      */
@@ -21,7 +21,7 @@ public interface IUserAchievementService
 
     /**
      * 查询用户成就列表
-     * 
+     *
      * @param userAchievement 用户成就
      * @return 用户成就集合
      */
@@ -29,7 +29,7 @@ public interface IUserAchievementService
 
     /**
      * 新增用户成就
-     * 
+     *
      * @param userAchievement 用户成就
      * @return 结果
      */
@@ -37,7 +37,7 @@ public interface IUserAchievementService
 
     /**
      * 修改用户成就
-     * 
+     *
      * @param userAchievement 用户成就
      * @return 结果
      */
@@ -45,7 +45,7 @@ public interface IUserAchievementService
 
     /**
      * 批量删除用户成就
-     * 
+     *
      * @param ids 需要删除的用户成就主键集合
      * @return 结果
      */
@@ -53,9 +53,12 @@ public interface IUserAchievementService
 
     /**
      * 删除用户成就信息
-     * 
+     *
      * @param id 用户成就主键
      * @return 结果
      */
     public int deleteUserAchievementById(Long id);
+
+    void isAchievement(Long userId);
+
 }

@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.smartLearning.mapper.AchievementConditionsMapper">
-    
+
     <resultMap type="AchievementConditions" id="AchievementConditionsResult">
         <result property="id"    column="id"    />
         <result property="name"    column="name"    />
         <result property="description"    column="description"    />
+        <result property="targetType"    column="target_type"    />
         <result property="targetValue"    column="target_value"    />
         <result property="rewardPoints"    column="reward_points"    />
         <result property="createdAt"    column="created_at"    />
@@ -15,21 +16,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectAchievementConditionsVo">
-        select id, name, description, target_value, reward_points, created_at, updated_at from achievement_conditions
+        select id, name, description, target_type, target_value, reward_points, created_at, updated_at from achievement_conditions
     </sql>
 
     <select id="selectAchievementConditionsList" parameterType="AchievementConditions" resultMap="AchievementConditionsResult">
         <include refid="selectAchievementConditionsVo"/>
-        <where>  
+        <where>
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
             <if test="description != null  and description != ''"> and description = #{description}</if>
+            <if test="targetType != null "> and target_type = #{targetType}</if>
             <if test="targetValue != null "> and target_value = #{targetValue}</if>
             <if test="rewardPoints != null "> and reward_points = #{rewardPoints}</if>
             <if test="createdAt != null "> and created_at = #{createdAt}</if>
             <if test="updatedAt != null "> and updated_at = #{updatedAt}</if>
         </where>
     </select>
-    
+
     <select id="selectAchievementConditionsById" parameterType="Long" resultMap="AchievementConditionsResult">
         <include refid="selectAchievementConditionsVo"/>
         where id = #{id}
@@ -40,19 +42,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="name != null and name != ''">name,</if>
             <if test="description != null">description,</if>
+            <if test="targetType != null">target_type,</if>
             <if test="targetValue != null">target_value,</if>
             <if test="rewardPoints != null">reward_points,</if>
             <if test="createdAt != null">created_at,</if>
             <if test="updatedAt != null">updated_at,</if>
-         </trim>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="name != null and name != ''">#{name},</if>
             <if test="description != null">#{description},</if>
+            <if test="targetType != null">#{targetType},</if>
             <if test="targetValue != null">#{targetValue},</if>
             <if test="rewardPoints != null">#{rewardPoints},</if>
             <if test="createdAt != null">#{createdAt},</if>
             <if test="updatedAt != null">#{updatedAt},</if>
-         </trim>
+        </trim>
     </insert>
 
     <update id="updateAchievementConditions" parameterType="AchievementConditions">
@@ -60,6 +64,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="SET" suffixOverrides=",">
             <if test="name != null and name != ''">name = #{name},</if>
             <if test="description != null">description = #{description},</if>
+            <if test="targetType != null">target_type = #{targetType},</if>
             <if test="targetValue != null">target_value = #{targetValue},</if>
             <if test="rewardPoints != null">reward_points = #{rewardPoints},</if>
             <if test="createdAt != null">created_at = #{createdAt},</if>
@@ -73,7 +78,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteAchievementConditionsByIds" parameterType="String">
-        delete from achievement_conditions where id in 
+        delete from achievement_conditions where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
