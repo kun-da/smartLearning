@@ -90,4 +90,9 @@ public class LearningResourcesServiceImpl implements ILearningResourcesService
     {
         return learningResourcesMapper.deleteLearningResourcesById(id);
     }
+
+    @Override
+    public List<LearningResources> selectLearningResourcesListShare(LearningResources learningResources) {
+        return learningResourcesMapper.selectLearningResourcesListShare(learningResources);
+    }
 }

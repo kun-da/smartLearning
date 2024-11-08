@@ -58,4 +58,6 @@ public interface ILearningResourcesService
      * @return 结果
      */
     public int deleteLearningResourcesById(Long id);
+
+    List<LearningResources> selectLearningResourcesListShare(LearningResources learningResources);
 }

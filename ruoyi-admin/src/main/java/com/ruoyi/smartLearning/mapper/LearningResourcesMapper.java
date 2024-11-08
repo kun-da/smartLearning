@@ -58,4 +58,6 @@ public interface LearningResourcesMapper
      * @return 结果
      */
     public int deleteLearningResourcesByIds(Long[] ids);
+
+    List<LearningResources> selectLearningResourcesListShare(LearningResources learningResources);
 }

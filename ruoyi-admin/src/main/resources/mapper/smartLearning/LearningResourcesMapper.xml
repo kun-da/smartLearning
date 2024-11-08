@@ -5,40 +5,59 @@
 <mapper namespace="com.ruoyi.smartLearning.mapper.LearningResourcesMapper">
 
     <resultMap type="LearningResources" id="LearningResourcesResult">
-        <result property="id"    column="id"    />
-        <result property="userId"    column="user_id"    />
-        <result property="planId"    column="plan_id"    />
-        <result property="taskId"    column="task_id"    />
-        <result property="documentName"    column="document_name"    />
-        <result property="documentDescription"    column="document_description"    />
-        <result property="filePath"    column="file_path"    />
-        <result property="fileType"    column="file_type"    />
-        <result property="isShared"    column="is_shared"    />
-        <result property="createdAt"    column="created_at"    />
+        <result property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="planId" column="plan_id"/>
+        <result property="taskId" column="task_id"/>
+        <result property="documentName" column="document_name"/>
+        <result property="documentDescription" column="document_description"/>
+        <result property="filePath" column="file_path"/>
+        <result property="fileType" column="file_type"/>
+        <result property="isShared" column="is_shared"/>
+        <result property="createdAt" column="created_at"/>
     </resultMap>
 
     <sql id="selectLearningResourcesVo">
-        select id, user_id, plan_id, task_id, document_name, document_description, file_path, file_type, is_shared, created_at from learning_resources
+        select id,
+               user_id,
+               plan_id,
+               task_id,
+               document_name,
+               document_description,
+               file_path,
+               file_type,
+               is_shared,
+               created_at
+        from learning_resources
     </sql>
 
     <select id="selectLearningResourcesList" parameterType="LearningResources" resultMap="LearningResourcesResult">
         <include refid="selectLearningResourcesVo"/>
         <where>
-            <if test="userId != null "> and user_id = #{userId}</if>
-            <if test="planId != null "> and plan_id = #{planId}</if>
-            <if test="taskId != null "> and task_id = #{taskId}</if>
-            <if test="documentName != null  and documentName != ''"> and document_name like concat('%', #{documentName}, '%')</if>
-            <if test="documentDescription != null  and documentDescription != ''"> and document_description = #{documentDescription}</if>
-            <if test="filePath != null  and filePath != ''"> and file_path = #{filePath}</if>
-            <if test="fileType != null  and fileType != ''"> and file_type = #{fileType}</if>
-            <if test="isShared != null "> and is_shared = #{isShared}</if>
-            <if test="createdAt != null "> and created_at = #{createdAt}</if>
+            <if test="userId != null ">and user_id = #{userId}</if>
+            <if test="planId != null ">and plan_id = #{planId}</if>
+            <if test="taskId != null ">and task_id = #{taskId}</if>
+            <if test="documentName != null  and documentName != ''">and document_name like concat('%', #{documentName},
+                '%')
+            </if>
+            <if test="documentDescription != null  and documentDescription != ''">and document_description =
+                #{documentDescription}
+            </if>
+            <if test="filePath != null  and filePath != ''">and file_path = #{filePath}</if>
+            <if test="fileType != null  and fileType != ''">and file_type = #{fileType}</if>
+            <if test="isShared != null ">and is_shared = #{isShared}</if>
+            <if test="createdAt != null ">and created_at = #{createdAt}</if>
         </where>
     </select>
 
     <select id="selectLearningResourcesById" parameterType="Long" resultMap="LearningResourcesResult">
         <include refid="selectLearningResourcesVo"/>
         where id = #{id}
+    </select>
+
+    <select id="selectLearningResourcesListShare" parameterType="LearningResources" resultMap="LearningResourcesResult">
+        <include refid="selectLearningResourcesVo"/>
+        where is_shared = 1 and user_id != #{userId}
     </select>
 
     <insert id="insertLearningResources" parameterType="LearningResources" useGeneratedKeys="true" keyProperty="id">
@@ -84,7 +103,9 @@
     </update>
 
     <delete id="deleteLearningResourcesById" parameterType="Long">
-        delete from learning_resources where id = #{id}
+        delete
+        from learning_resources
+        where id = #{id}
     </delete>
 
     <delete id="deleteLearningResourcesByIds" parameterType="String">
