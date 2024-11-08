@@ -9,19 +9,19 @@ import com.ruoyi.smartLearning.service.ILearningResourcesService;
 
 /**
  * 学习资料Service业务层处理
- * 
+ *
  * @author 虞嘉欣
- * @date 2024-10-21
+ * @date 2024-11-08
  */
 @Service
-public class LearningResourcesServiceImpl implements ILearningResourcesService 
+public class LearningResourcesServiceImpl implements ILearningResourcesService
 {
     @Autowired
     private LearningResourcesMapper learningResourcesMapper;
 
     /**
      * 查询学习资料
-     * 
+     *
      * @param id 学习资料主键
      * @return 学习资料
      */
@@ -33,7 +33,7 @@ public class LearningResourcesServiceImpl implements ILearningResourcesService
 
     /**
      * 查询学习资料列表
-     * 
+     *
      * @param learningResources 学习资料
      * @return 学习资料
      */
@@ -45,7 +45,7 @@ public class LearningResourcesServiceImpl implements ILearningResourcesService
 
     /**
      * 新增学习资料
-     * 
+     *
      * @param learningResources 学习资料
      * @return 结果
      */
@@ -57,7 +57,7 @@ public class LearningResourcesServiceImpl implements ILearningResourcesService
 
     /**
      * 修改学习资料
-     * 
+     *
      * @param learningResources 学习资料
      * @return 结果
      */
@@ -69,7 +69,7 @@ public class LearningResourcesServiceImpl implements ILearningResourcesService
 
     /**
      * 批量删除学习资料
-     * 
+     *
      * @param ids 需要删除的学习资料主键
      * @return 结果
      */
@@ -81,7 +81,7 @@ public class LearningResourcesServiceImpl implements ILearningResourcesService
 
     /**
      * 删除学习资料信息
-     * 
+     *
      * @param id 学习资料主键
      * @return 结果
      */

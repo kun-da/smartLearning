@@ -17,8 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @date 2024-11-05
  */
 @Service
-public class UserAchievementServiceImpl implements IUserAchievementService
-{
+public class UserAchievementServiceImpl implements IUserAchievementService {
     @Autowired
     private UserAchievementMapper userAchievementMapper;
 
@@ -41,8 +40,7 @@ public class UserAchievementServiceImpl implements IUserAchievementService
      * @return 用户成就
      */
     @Override
-    public UserAchievement selectUserAchievementById(Long id)
-    {
+    public UserAchievement selectUserAchievementById(Long id) {
         return userAchievementMapper.selectUserAchievementById(id);
     }
 
@@ -53,8 +51,7 @@ public class UserAchievementServiceImpl implements IUserAchievementService
      * @return 用户成就
      */
     @Override
-    public List<UserAchievement> selectUserAchievementList(UserAchievement userAchievement)
-    {
+    public List<UserAchievement> selectUserAchievementList(UserAchievement userAchievement) {
         return userAchievementMapper.selectUserAchievementList(userAchievement);
     }
 
@@ -65,8 +62,7 @@ public class UserAchievementServiceImpl implements IUserAchievementService
      * @return 结果
      */
     @Override
-    public int insertUserAchievement(UserAchievement userAchievement)
-    {
+    public int insertUserAchievement(UserAchievement userAchievement) {
         return userAchievementMapper.insertUserAchievement(userAchievement);
     }
 
@@ -77,8 +73,7 @@ public class UserAchievementServiceImpl implements IUserAchievementService
      * @return 结果
      */
     @Override
-    public int updateUserAchievement(UserAchievement userAchievement)
-    {
+    public int updateUserAchievement(UserAchievement userAchievement) {
         return userAchievementMapper.updateUserAchievement(userAchievement);
     }
 
@@ -89,8 +84,7 @@ public class UserAchievementServiceImpl implements IUserAchievementService
      * @return 结果
      */
     @Override
-    public int deleteUserAchievementByIds(Long[] ids)
-    {
+    public int deleteUserAchievementByIds(Long[] ids) {
         return userAchievementMapper.deleteUserAchievementByIds(ids);
     }
 
@@ -101,8 +95,7 @@ public class UserAchievementServiceImpl implements IUserAchievementService
      * @return 结果
      */
     @Override
-    public int deleteUserAchievementById(Long id)
-    {
+    public int deleteUserAchievementById(Long id) {
         return userAchievementMapper.deleteUserAchievementById(id);
     }
 
@@ -164,12 +157,16 @@ public class UserAchievementServiceImpl implements IUserAchievementService
                 //获取成就需要要达到的学习时间
                 Long targetValue = achievementCondition.getTargetValue();
                 if (totalHoursSpent >= targetValue) {
-                    //成就完成则，将当前成就存入用户成就表
+                    //判断用户成就表中是否已经存在该成就
                     UserAchievement userAchievement = new UserAchievement();
                     userAchievement.setUserId(userId);
                     userAchievement.setAchievementId(achievementCondition.getId());
-                    userAchievement.setAchievementTime(new Date());
-                    userAchievementMapper.insertUserAchievement(userAchievement);
+                    List<UserAchievement> userAchievementList = userAchievementMapper.selectUserAchievementList(userAchievement);
+                    if (userAchievementList.isEmpty()) {
+                        //成就完成则，将当前成就存入用户成就表
+                        userAchievement.setAchievementTime(new Date());
+                        userAchievementMapper.insertUserAchievement(userAchievement);
+                    }
                 }
             }
             //计划总数判断
@@ -177,12 +174,16 @@ public class UserAchievementServiceImpl implements IUserAchievementService
                 //获取成就需要要达到的计划总数
                 Long targetValue = achievementCondition.getTargetValue();
                 if (totalPlans >= targetValue) {
-                    //成就完成则，将当前成就存入用户成就表
+                    //判断用户成就表中是否已经存在该成就
                     UserAchievement userAchievement = new UserAchievement();
                     userAchievement.setUserId(userId);
                     userAchievement.setAchievementId(achievementCondition.getId());
-                    userAchievement.setAchievementTime(new Date());
-                    userAchievementMapper.insertUserAchievement(userAchievement);
+                    List<UserAchievement> userAchievementList = userAchievementMapper.selectUserAchievementList(userAchievement);
+                    if (userAchievementList.isEmpty()) {
+                        //成就完成则，将当前成就存入用户成就表
+                        userAchievement.setAchievementTime(new Date());
+                        userAchievementMapper.insertUserAchievement(userAchievement);
+                    }
                 }
             }
             //任务完成数判断
@@ -190,12 +191,16 @@ public class UserAchievementServiceImpl implements IUserAchievementService
                 //获取成就需要要达到的任务完成数
                 Long targetValue = achievementCondition.getTargetValue();
                 if (totalTasks >= targetValue) {
-                    //成就完成则，将当前成就存入用户成就表
+                    //判断用户成就表中是否已经存在该成就
                     UserAchievement userAchievement = new UserAchievement();
                     userAchievement.setUserId(userId);
                     userAchievement.setAchievementId(achievementCondition.getId());
-                    userAchievement.setAchievementTime(new Date());
-                    userAchievementMapper.insertUserAchievement(userAchievement);
+                    List<UserAchievement> userAchievementList = userAchievementMapper.selectUserAchievementList(userAchievement);
+                    if (userAchievementList.isEmpty()) {
+                        //成就完成则，将当前成就存入用户成就表
+                        userAchievement.setAchievementTime(new Date());
+                        userAchievementMapper.insertUserAchievement(userAchievement);
+                    }
                 }
             }
         }

@@ -1,33 +1,41 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.smartLearning.mapper.LearningResourcesMapper">
-    
+
     <resultMap type="LearningResources" id="LearningResourcesResult">
         <result property="id"    column="id"    />
         <result property="userId"    column="user_id"    />
         <result property="planId"    column="plan_id"    />
+        <result property="taskId"    column="task_id"    />
+        <result property="documentName"    column="document_name"    />
+        <result property="documentDescription"    column="document_description"    />
         <result property="filePath"    column="file_path"    />
         <result property="fileType"    column="file_type"    />
+        <result property="isShared"    column="is_shared"    />
         <result property="createdAt"    column="created_at"    />
     </resultMap>
 
     <sql id="selectLearningResourcesVo">
-        select id, user_id, plan_id, file_path, file_type, created_at from learning_resources
+        select id, user_id, plan_id, task_id, document_name, document_description, file_path, file_type, is_shared, created_at from learning_resources
     </sql>
 
     <select id="selectLearningResourcesList" parameterType="LearningResources" resultMap="LearningResourcesResult">
         <include refid="selectLearningResourcesVo"/>
-        <where>  
+        <where>
             <if test="userId != null "> and user_id = #{userId}</if>
             <if test="planId != null "> and plan_id = #{planId}</if>
+            <if test="taskId != null "> and task_id = #{taskId}</if>
+            <if test="documentName != null  and documentName != ''"> and document_name like concat('%', #{documentName}, '%')</if>
+            <if test="documentDescription != null  and documentDescription != ''"> and document_description = #{documentDescription}</if>
             <if test="filePath != null  and filePath != ''"> and file_path = #{filePath}</if>
             <if test="fileType != null  and fileType != ''"> and file_type = #{fileType}</if>
+            <if test="isShared != null "> and is_shared = #{isShared}</if>
             <if test="createdAt != null "> and created_at = #{createdAt}</if>
         </where>
     </select>
-    
+
     <select id="selectLearningResourcesById" parameterType="Long" resultMap="LearningResourcesResult">
         <include refid="selectLearningResourcesVo"/>
         where id = #{id}
@@ -38,17 +46,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="userId != null">user_id,</if>
             <if test="planId != null">plan_id,</if>
+            <if test="taskId != null">task_id,</if>
+            <if test="documentName != null">document_name,</if>
+            <if test="documentDescription != null">document_description,</if>
             <if test="filePath != null and filePath != ''">file_path,</if>
             <if test="fileType != null">file_type,</if>
+            <if test="isShared != null">is_shared,</if>
             <if test="createdAt != null">created_at,</if>
-         </trim>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="userId != null">#{userId},</if>
             <if test="planId != null">#{planId},</if>
+            <if test="taskId != null">#{taskId},</if>
+            <if test="documentName != null">#{documentName},</if>
+            <if test="documentDescription != null">#{documentDescription},</if>
             <if test="filePath != null and filePath != ''">#{filePath},</if>
             <if test="fileType != null">#{fileType},</if>
+            <if test="isShared != null">#{isShared},</if>
             <if test="createdAt != null">#{createdAt},</if>
-         </trim>
+        </trim>
     </insert>
 
     <update id="updateLearningResources" parameterType="LearningResources">
@@ -56,8 +72,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <trim prefix="SET" suffixOverrides=",">
             <if test="userId != null">user_id = #{userId},</if>
             <if test="planId != null">plan_id = #{planId},</if>
+            <if test="taskId != null">task_id = #{taskId},</if>
+            <if test="documentName != null">document_name = #{documentName},</if>
+            <if test="documentDescription != null">document_description = #{documentDescription},</if>
             <if test="filePath != null and filePath != ''">file_path = #{filePath},</if>
             <if test="fileType != null">file_type = #{fileType},</if>
+            <if test="isShared != null">is_shared = #{isShared},</if>
             <if test="createdAt != null">created_at = #{createdAt},</if>
         </trim>
         where id = #{id}
@@ -68,7 +88,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteLearningResourcesByIds" parameterType="String">
-        delete from learning_resources where id in 
+        delete from learning_resources where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

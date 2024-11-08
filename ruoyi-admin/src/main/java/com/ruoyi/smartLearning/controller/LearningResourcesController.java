@@ -23,9 +23,9 @@ import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * 学习资料Controller
- * 
+ *
  * @author 虞嘉欣
- * @date 2024-10-21
+ * @date 2024-11-08
  */
 @RestController
 @RequestMapping("/smartLearning/resources")
@@ -96,7 +96,7 @@ public class LearningResourcesController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('smartLearning:resources:remove')")
     @Log(title = "学习资料", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{ids}")
+    @DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)
     {
         return toAjax(learningResourcesService.deleteLearningResourcesByIds(ids));

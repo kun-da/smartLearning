@@ -42,7 +42,7 @@ public class MyAchievementsViewController extends BaseController {
     @GetMapping("/isAchievement")
     public AjaxResult isAchievement(){
         Long userId = getUserId();
-        //处理具体逻辑(有更改返回true，无更改返回false)
+        //处理具体逻辑
         userAchievementService.isAchievement(userId);
         return AjaxResult.success();
     }
